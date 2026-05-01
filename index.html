@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emmet Wall — Hard Rock & Metal</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --orange:#E87B1E;
+  --bg:#080808;
+  --bg2:#0f0f0f;
+  --bg3:#111;
+  --border:#1f1f1f;
+  --text:#e0e0e0;
+  --muted:#888;
+  --dim:#555;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Source Serif 4',serif;
+  --display:'Bebas Neue',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--serif);font-weight:300;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:flex-end;padding:20px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100;}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--orange);}
+
+/* BANNER */
+.banner-strip{background:var(--bg);border-bottom:1px solid var(--border);padding-left:50px;}
+.banner-strip img{display:block;max-width:100%;height:auto;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:560px;}
+.hero-img{overflow:hidden;position:relative;padding:24px 24px 0 50px;background:var(--bg);}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.hero-text{padding:64px 56px 64px 50px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);background:var(--bg);}
+.hero-label{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:20px;}
+.hero-title{font-family:var(--display);font-size:64px;line-height:1;letter-spacing:4px;color:var(--text);margin-bottom:20px;}
+.hero-sub{font-size:15px;line-height:1.7;color:var(--muted);font-style:italic;margin-bottom:36px;}
+.cta-btn{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text);border:1px solid var(--orange);padding:14px 28px;transition:background .2s;width:fit-content;}
+.cta-btn:hover{background:var(--orange);}
+
+/* SECTIONS */
+section{border-top:1px solid var(--border);}
+.section-inner{padding:64px 48px;}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:40px;}
+
+/* DISCOGRAPHY */
+.album-group{margin-bottom:56px;}
+.album-group-header{display:flex;align-items:center;gap:24px;margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.album-group-cover{width:80px;height:80px;object-fit:cover;border:1px solid var(--border);flex-shrink:0;}
+.album-group-info{}
+.album-group-title{font-family:var(--display);font-size:32px;letter-spacing:3px;color:var(--text);line-height:1;}
+.album-group-meta{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:3px;margin-top:4px;}
+.album-group-tag{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--orange);margin-top:4px;}
+
+/* Singles grid */
+.singles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:8px;}
+.single-card{border:1px solid var(--border);cursor:pointer;transition:border-color .2s;}
+.single-card:hover{border-color:var(--orange);}
+.single-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+.single-card-info{padding:10px;}
+.single-card-title{font-family:var(--mono);font-size:10px;color:var(--text);letter-spacing:1px;}
+.single-card-date{font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:3px;}
+.single-card.coming{opacity:0.5;cursor:default;}
+.single-card.coming:hover{border-color:var(--border);}
+
+/* Full album tracklist */
+.tracklist{border-top:1px solid var(--border);}
+.track{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
+.track-num{font-family:var(--mono);font-size:10px;color:var(--orange);min-width:28px;letter-spacing:1px;}
+.track-title{font-family:var(--mono);font-size:12px;color:var(--text);flex:1;letter-spacing:1px;}
+.track-duration{font-family:var(--mono);font-size:10px;color:var(--dim);}
+.track-link{font-family:var(--mono);font-size:9px;color:var(--orange);letter-spacing:2px;margin-left:16px;opacity:0;transition:opacity .2s;}
+.track:hover .track-link{opacity:1;}
+
+/* ALBUM PAGE */
+.album-page{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:200;overflow-y:auto;}
+.album-page.active{display:block;}
+.album-page-inner{max-width:900px;margin:0 auto;padding:64px 48px;}
+.album-back{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;cursor:pointer;margin-bottom:48px;display:inline-block;border:1px solid var(--border);padding:10px 20px;transition:color .2s,border-color .2s;}
+.album-back:hover{color:var(--text);border-color:var(--dim);}
+.album-layout{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start;}
+.album-cover{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--border);}
+.album-page-label{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:12px;}
+.album-page-title{font-family:var(--display);font-size:48px;letter-spacing:3px;color:var(--text);line-height:1;margin-bottom:4px;}
+.album-page-year{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:3px;margin-bottom:32px;}
+.album-listen{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text);border:1px solid var(--orange);padding:14px 28px;transition:background .2s;margin-top:24px;}
+.album-listen:hover{background:var(--orange);}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:320px 1fr;gap:56px;align-items:start;}
+.about-img{width:100%;object-fit:cover;border:1px solid var(--border);display:block;}
+.about-text{font-size:16px;line-height:1.85;color:var(--muted);}
+.about-text strong{color:var(--text);font-weight:400;}
+.about-text em{color:var(--text);font-style:italic;}
+.dsp-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px;}
+.dsp-link{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:10px 20px;transition:color .2s,border-color .2s;}
+.dsp-link:hover{color:var(--text);border-color:var(--dim);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:2px;}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:16px 24px;}
+  .banner-strip{padding-left:0;}
+  .hero{grid-template-columns:1fr;}
+  .hero-img{height:340px;padding:12px 12px 0 12px;}
+  .hero-text{padding:40px 24px;}
+  .hero-title{font-size:48px;}
+  .section-inner{padding:48px 24px;}
+  .singles-grid{grid-template-columns:repeat(2,1fr);}
+  .about-grid{grid-template-columns:1fr;}
+  .album-layout{grid-template-columns:1fr;}
+  .album-page-inner{padding:40px 24px;}
+  footer{padding:24px;flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-links">
+    <a href="#music">Music</a>
+    <a href="#about">About</a>
+    <a href="https://emmetwall25.bandcamp.com" target="_blank">Bandcamp</a>
+  </div>
+</nav>
+
+<div class="banner-strip">
+  <img src="images/EmmetWall-banner01.png" alt="Emmet Wall">
+</div>
+
+<div class="hero">
+  <div class="hero-img">
+    <img src="images/EmmetSolo4.png" alt="Emmet Wall">
+  </div>
+  <div class="hero-text">
+    <div class="hero-label">Latest Release — 2026</div>
+    <div class="hero-title">DEEP WALLS</div>
+    <div style="display:flex;align-items:flex-start;gap:20px;margin-bottom:20px;">
+      <img src="images/Emmet%20Wall-Deep%20Walls.png" alt="Deep Walls" style="width:120px;height:120px;object-fit:cover;border:1px solid #1f1f1f;flex-shrink:0;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#555;line-height:1.8;letter-spacing:1px;">
+        Adem's Song — Dec 2025<br>
+        Fools — Jan 2026<br>
+        Gravitron In My Head — Feb 2026<br>
+        <span style="color:#E87B1E;">ZRHD — May 25, 2026</span>
+      </div>
+    </div>
+    <div class="hero-sub">Hard rock and metal from central New Jersey.<br>Two albums. Still ascending.</div>
+    <a href="https://emmetwall25.bandcamp.com" target="_blank" class="cta-btn">Listen on Bandcamp</a>
+  </div>
+</div>
+
+<!-- DISCOGRAPHY -->
+<section id="music">
+  <div class="section-inner">
+    <div class="section-label">Discography</div>
+
+    <!-- DEEP WALLS -->
+    <div class="album-group">
+      <div class="album-group-header">
+        <img src="images/Emmet%20Wall-Deep%20Walls.png" alt="Deep Walls" class="album-group-cover">
+        <div class="album-group-info">
+          <div class="album-group-title">DEEP WALLS</div>
+          <div class="album-group-meta">Album — In Progress</div>
+          <div class="album-group-tag">Singles releasing now</div>
+        </div>
+      </div>
+      <div class="singles-grid">
+        <div class="single-card" onclick="openAlbum('adems')">
+          <img src="images/Adems%20Song.png" alt="Adem's Song">
+          <div class="single-card-info">
+            <div class="single-card-title">Adem's Song</div>
+            <div class="single-card-date">December 2025</div>
+          </div>
+        </div>
+        <div class="single-card" onclick="openAlbum('fools')">
+          <img src="images/Fools.png" alt="Fools">
+          <div class="single-card-info">
+            <div class="single-card-title">Fools</div>
+            <div class="single-card-date">January 2026</div>
+          </div>
+        </div>
+        <div class="single-card" onclick="openAlbum('gravitron')">
+          <img src="images/Gravitron%20In%20My%20Head.png" alt="Gravitron In My Head">
+          <div class="single-card-info">
+            <div class="single-card-title">Gravitron In My Head</div>
+            <div class="single-card-date">February 2026</div>
+          </div>
+        </div>
+        <div class="single-card coming">
+          <div style="width:100%;aspect-ratio:1;background:#0d0d0d;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #1f1f1f;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;color:#E87B1E;letter-spacing:4px;">ZRHD</div>
+          </div>
+          <div class="single-card-info">
+            <div class="single-card-title">ZRHD</div>
+            <div class="single-card-date" style="color:#E87B1E;">May 25, 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AT -->
+    <div class="album-group">
+      <div class="album-group-header">
+        <img src="images/Emmet%20Wall-AT.png" alt="AT" class="album-group-cover">
+        <div class="album-group-info">
+          <div class="album-group-title">AT</div>
+          <div class="album-group-meta">Album — 2023</div>
+        </div>
+      </div>
+      <div class="tracklist">
+        <a href="https://emmetwall25.bandcamp.com/track/thats-just-my-style" target="_blank"><div class="track"><span class="track-num">01</span><span class="track-title">That's Just My Style</span><span class="track-duration">2:45</span><span class="track-link">BANDCAMP ↗</span></div></a>
+        <a href="https://emmetwall25.bandcamp.com/track/no-croutons" target="_blank"><div class="track"><span class="track-num">02</span><span class="track-title">No Croutons</span><span class="track-duration">2:26</span><span class="track-link">BANDCAMP ↗</span></div></a>
+        <a href="https://emmetwall25.bandcamp.com/track/out-of-my-mind" target="_blank"><div class="track"><span class="track-num">03</span><span class="track-title">Out Of My Mind</span><span class="track-duration">2:17</span><span class="track-link">BANDCAMP ↗</span></div></a>
+        <a href="https://emmetwall25.bandcamp.com/track/burning-down-the-house-cover-song" target="_blank"><div class="track"><span class="track-num">04</span><span class="track-title">Burning Down The House (cover)</span><span class="track-duration">3:02</span><span class="track-link">BANDCAMP ↗</span></div></a>
+        <a href="https://emmetwall25.bandcamp.com/track/stop-the-not" target="_blank"><div class="track"><span class="track-num">05</span><span class="track-title">Stop The Not</span><span class="track-duration">2:33</span><span class="track-link">BANDCAMP ↗</span></div></a>
+        <a href="https://emmetwall25.bandcamp.com/track/i-see-numbers" target="_blank"><div class="track"><span class="track-num">06</span><span class="track-title">I See Numbers</span><span class="track-duration">3:31</span><span class="track-link">BANDCAMP ↗</span></div></a>
+        <a href="https://emmetwall25.bandcamp.com/track/climbing-up-the-pads-25" target="_blank"><div class="track"><span class="track-num">07</span><span class="track-title">Climbing Up The Pads 25</span><span class="track-duration">3:01</span><span class="track-link">BANDCAMP ↗</span></div></a>
+        <a href="https://emmetwall25.bandcamp.com/track/im-ready" target="_blank"><div class="track"><span class="track-num">08</span><span class="track-title">I'm Ready</span><span class="track-duration">3:12</span><span class="track-link">BANDCAMP ↗</span></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <img src="images/EmmetSolo1.png" alt="Emmet Wall" class="about-img">
+      <div>
+        <div class="about-text">
+          <strong>Emmet Wall</strong> is a singer and drummer from central New Jersey whose music draws from hard rock, new wave, and metal. He began his musical education at School of Rock in Princeton at age six, developing a foundation that shaped both his technical ability and his instinct for songwriting.<br><br>
+          His debut album <em>AT</em> (2023) arrived when Emmet was fifteen — a record that blended hard rock energy with new wave sensibility, its lyrics shaped by the particular strangeness of adolescence during the COVID years.<br><br>
+          His second album <em>Deep Walls</em> marks a deliberate turn toward heavier territory. The first single <em>Adem's Song</em> (December 2025) established the new direction, followed by <em>Fools</em> (January 2026) and <em>Gravitron In My Head</em> (February 2026). A fourth single <em>ZRHD</em> drops May 25th, 2026.
+        </div>
+        <div class="dsp-links">
+          <a href="https://emmetwall25.bandcamp.com" target="_blank" class="dsp-link">Bandcamp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Emmet Wall — All Rights Reserved</div>
+  <div class="footer-copy">emmetwall.com</div>
+</footer>
+
+<!-- SINGLE PAGES -->
+<div id="album-adems" class="album-page">
+  <div class="album-page-inner">
+    <div class="album-back" onclick="closeAlbum()">← Back</div>
+    <div class="album-layout">
+      <img src="images/Adems%20Song.png" alt="Adem's Song" class="album-cover">
+      <div>
+        <div class="album-page-label">Emmet Wall — Deep Walls</div>
+        <div class="album-page-title">ADEM'S SONG</div>
+        <div class="album-page-year">Single — December 2025</div>
+        <a href="https://emmetwall25.bandcamp.com/track/adems-song" target="_blank" class="album-listen">Listen on Bandcamp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="album-fools" class="album-page">
+  <div class="album-page-inner">
+    <div class="album-back" onclick="closeAlbum()">← Back</div>
+    <div class="album-layout">
+      <img src="images/Fools.png" alt="Fools" class="album-cover">
+      <div>
+        <div class="album-page-label">Emmet Wall — Deep Walls</div>
+        <div class="album-page-title">FOOLS</div>
+        <div class="album-page-year">Single — January 2026</div>
+        <a href="https://emmetwall25.bandcamp.com/track/fools" target="_blank" class="album-listen">Listen on Bandcamp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="album-gravitron" class="album-page">
+  <div class="album-page-inner">
+    <div class="album-back" onclick="closeAlbum()">← Back</div>
+    <div class="album-layout">
+      <img src="images/Gravitron%20In%20My%20Head.png" alt="Gravitron In My Head" class="album-cover">
+      <div>
+        <div class="album-page-label">Emmet Wall — Deep Walls</div>
+        <div class="album-page-title">GRAVITRON IN MY HEAD</div>
+        <div class="album-page-year">Single — February 2026</div>
+        <a href="https://emmetwall25.bandcamp.com/track/gravitron-in-my-head" target="_blank" class="album-listen">Listen on Bandcamp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAlbum(id){
+  document.querySelectorAll('.album-page').forEach(p=>p.classList.remove('active'));
+  var el=document.getElementById('album-'+id);
+  if(el){el.classList.add('active');el.scrollTop=0;document.body.style.overflow='hidden';}
+}
+function closeAlbum(){
+  document.querySelectorAll('.album-page').forEach(p=>p.classList.remove('active'));
+  document.body.style.overflow='';
+}
+</script>
+</body>
+</html>
