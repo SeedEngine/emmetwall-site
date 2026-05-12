@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Emmet Wall — Hard Rock & Metal</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+<!-- Open Graph -->
+<meta property="og:title" content="Emmet Wall — Hard Rock & Metal">
+<meta property="og:description" content="Two albums. Hard rock and metal from central New Jersey. Deep Walls dropping now.">
+<meta property="og:image" content="https://emmetwall.com/images/EmmetSolo1.png">
+<meta property="og:url" content="https://emmetwall.com">
+<meta property="og:type" content="music.musician">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Emmet Wall">
+<meta name="twitter:description" content="Two albums. Hard rock and metal from central New Jersey. Deep Walls dropping now.">
+<meta name="twitter:image" content="https://emmetwall.com/images/EmmetSolo1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -91,9 +101,14 @@ section{border-top:1px solid var(--border);}
 .album-cover{width:100%;aspect-ratio:1;object-fit:cover;border:1px solid var(--border);}
 .album-page-label{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--orange);text-transform:uppercase;margin-bottom:12px;}
 .album-page-title{font-family:var(--display);font-size:48px;letter-spacing:3px;color:var(--text);line-height:1;margin-bottom:4px;}
-.album-page-year{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:3px;margin-bottom:32px;}
-.album-listen{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text);border:1px solid var(--orange);padding:14px 28px;transition:background .2s;margin-top:24px;}
+.album-page-year{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:3px;margin-bottom:24px;}
+.album-liner{font-family:var(--serif);font-size:14px;line-height:1.8;color:var(--muted);font-style:italic;margin-bottom:28px;border-left:2px solid var(--orange);padding-left:16px;}
+.album-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px;}
+.album-listen{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text);border:1px solid var(--orange);padding:14px 28px;transition:background .2s;}
 .album-listen:hover{background:var(--orange);}
+.album-listen-secondary{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:14px 28px;transition:color .2s,border-color .2s;}
+.album-listen-secondary:hover{color:var(--text);border-color:var(--dim);}
+.spotify-embed{margin-top:8px;}
 
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:320px 1fr;gap:56px;align-items:start;}
@@ -140,9 +155,10 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
   <img src="images/EmmetWall-banner01.png" alt="Emmet Wall">
 </div>
 
+<!-- HERO — swapped to EmmetSolo1.png (mic pointing shot) -->
 <div class="hero">
   <div class="hero-img">
-    <img src="images/EmmetSolo4.png" alt="Emmet Wall">
+    <img src="images/EmmetSolo1.png" alt="Emmet Wall">
   </div>
   <div class="hero-text">
     <div class="hero-label">Latest Release — 2026</div>
@@ -157,7 +173,11 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
       </div>
     </div>
     <div class="hero-sub">Hard rock and metal from central New Jersey.<br>Two albums. Still ascending.</div>
-    <a href="https://emmetwall25.bandcamp.com" target="_blank" class="cta-btn">Listen on Bandcamp</a>
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
+      <a href="https://emmetwall25.bandcamp.com" target="_blank" class="cta-btn">Listen on Bandcamp</a>
+      <a href="https://open.spotify.com/artist/emmetwall" target="_blank" class="cta-btn" style="border-color:var(--border);color:var(--dim);">Listen on Spotify</a>
+      <a href="https://music.apple.com/us/artist/emmet-wall/1670558769" target="_blank" class="cta-btn" style="border-color:var(--border);color:var(--dim);">Listen on Apple Music</a>
+    </div>
   </div>
 </div>
 
@@ -198,7 +218,7 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
             <div class="single-card-date">February 2026</div>
           </div>
         </div>
-        <div class="single-card coming">
+        <div class="single-card coming" onclick="openAlbum('zrhd')">
           <div style="width:100%;aspect-ratio:1;background:#0d0d0d;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #1f1f1f;">
             <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;color:#E87B1E;letter-spacing:4px;">ZRHD</div>
           </div>
@@ -229,7 +249,19 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
         <a href="https://emmetwall25.bandcamp.com/track/climbing-up-the-pads-25" target="_blank"><div class="track"><span class="track-num">07</span><span class="track-title">Climbing Up The Pads 25</span><span class="track-duration">3:01</span><span class="track-link">BANDCAMP ↗</span></div></a>
         <a href="https://emmetwall25.bandcamp.com/track/im-ready" target="_blank"><div class="track"><span class="track-num">08</span><span class="track-title">I'm Ready</span><span class="track-duration">3:12</span><span class="track-link">BANDCAMP ↗</span></div></a>
       </div>
+      <div style="margin-top:32px;">
+        <div class="album-liner" style="border-left:2px solid var(--orange);padding-left:16px;font-family:var(--serif);font-size:14px;line-height:1.8;color:var(--muted);font-style:italic;margin-bottom:28px;">Emmet's debut arrived in 2023 when he was fifteen — eight tracks written and recorded during the strange suspended time of the COVID years. Hard rock energy colliding with new wave instinct, its lyrics carrying the particular strangeness of adolescence lived mostly indoors. School of Rock trained, but the voice on this record is entirely his own.</div>
+        <div class="album-actions">
+          <a href="https://emmetwall25.bandcamp.com/album/at" target="_blank" class="album-listen">Bandcamp</a>
+          <a href="https://open.spotify.com/album/15Qe0Fn1P9yHEml2IwYX4H" target="_blank" class="album-listen-secondary">Spotify</a>
+          <a href="https://music.apple.com/us/album/at/1670558770" target="_blank" class="album-listen-secondary">Apple Music</a>
+        </div>
+        <div class="spotify-embed">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/15Qe0Fn1P9yHEml2IwYX4H?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -238,7 +270,7 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
   <div class="section-inner">
     <div class="section-label">About</div>
     <div class="about-grid">
-      <img src="images/EmmetSolo1.png" alt="Emmet Wall" class="about-img">
+      <img src="images/EmmetSolo4.png" alt="Emmet Wall" class="about-img">
       <div>
         <div class="about-text">
           <strong>Emmet Wall</strong> is a singer and drummer from central New Jersey whose music draws from hard rock, new wave, and metal. He began his musical education at School of Rock in Princeton at age six, developing a foundation that shaped both his technical ability and his instinct for songwriting.<br><br>
@@ -247,6 +279,8 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
         </div>
         <div class="dsp-links">
           <a href="https://emmetwall25.bandcamp.com" target="_blank" class="dsp-link">Bandcamp</a>
+          <a href="https://open.spotify.com/artist/emmetwall" target="_blank" class="dsp-link">Spotify</a>
+          <a href="https://music.apple.com/us/artist/emmet-wall/1670558769" target="_blank" class="dsp-link">Apple Music</a>
         </div>
       </div>
     </div>
@@ -259,6 +293,7 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
 </footer>
 
 <!-- SINGLE PAGES -->
+
 <div id="album-adems" class="album-page">
   <div class="album-page-inner">
     <div class="album-back" onclick="closeAlbum()">← Back</div>
@@ -268,7 +303,14 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
         <div class="album-page-label">Emmet Wall — Deep Walls</div>
         <div class="album-page-title">ADEM'S SONG</div>
         <div class="album-page-year">Single — December 2025</div>
-        <a href="https://emmetwall25.bandcamp.com/track/adems-song" target="_blank" class="album-listen">Listen on Bandcamp</a>
+        <div class="album-actions">
+          <a href="https://emmetwall25.bandcamp.com/track/adems-song" target="_blank" class="album-listen">Bandcamp</a>
+          <a href="https://open.spotify.com/track/1rrAdltIf4bYIe502sY2ac" target="_blank" class="album-listen-secondary">Spotify</a>
+          <a href="https://music.apple.com/us/album/adems-song/1860046355?i=1860046358" target="_blank" class="album-listen-secondary">Apple Music</a>
+        </div>
+        <div class="spotify-embed">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1rrAdltIf4bYIe502sY2ac?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -283,7 +325,14 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
         <div class="album-page-label">Emmet Wall — Deep Walls</div>
         <div class="album-page-title">FOOLS</div>
         <div class="album-page-year">Single — January 2026</div>
-        <a href="https://emmetwall25.bandcamp.com/track/fools" target="_blank" class="album-listen">Listen on Bandcamp</a>
+        <div class="album-actions">
+          <a href="https://emmetwall25.bandcamp.com/track/fools" target="_blank" class="album-listen">Bandcamp</a>
+          <a href="https://open.spotify.com/track/0vBsAg6chD7o6Xm1kXomYm" target="_blank" class="album-listen-secondary">Spotify</a>
+          <a href="https://music.apple.com/us/album/fools/1863647693?i=1863647694" target="_blank" class="album-listen-secondary">Apple Music</a>
+        </div>
+        <div class="spotify-embed">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0vBsAg6chD7o6Xm1kXomYm?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -298,7 +347,32 @@ footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify
         <div class="album-page-label">Emmet Wall — Deep Walls</div>
         <div class="album-page-title">GRAVITRON IN MY HEAD</div>
         <div class="album-page-year">Single — February 2026</div>
-        <a href="https://emmetwall25.bandcamp.com/track/gravitron-in-my-head" target="_blank" class="album-listen">Listen on Bandcamp</a>
+        <div class="album-actions">
+          <a href="https://emmetwall25.bandcamp.com/track/gravitron-in-my-head" target="_blank" class="album-listen">Bandcamp</a>
+          <a href="https://open.spotify.com/track/0Zgd8B0qoNLbVSZ4nCq0fn" target="_blank" class="album-listen-secondary">Spotify</a>
+          <a href="https://music.apple.com/us/album/gravitron-in-my-head/1868900727?i=1868900728" target="_blank" class="album-listen-secondary">Apple Music</a>
+        </div>
+        <div class="spotify-embed">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0Zgd8B0qoNLbVSZ4nCq0fn?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ZRHD — Coming Soon -->
+<div id="album-zrhd" class="album-page">
+  <div class="album-page-inner">
+    <div class="album-back" onclick="closeAlbum()">← Back</div>
+    <div class="album-layout">
+      <div style="width:100%;aspect-ratio:1;background:#0d0d0d;display:flex;align-items:center;justify-content:center;border:1px solid #1f1f1f;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:32px;color:#E87B1E;letter-spacing:6px;">ZRHD</div>
+      </div>
+      <div>
+        <div class="album-page-label">Emmet Wall — Deep Walls</div>
+        <div class="album-page-title">ZRHD</div>
+        <div class="album-page-year" style="color:var(--orange);">Single — May 25, 2026</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:3px;margin-top:16px;">Coming soon.</div>
       </div>
     </div>
   </div>
